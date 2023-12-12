@@ -319,6 +319,7 @@ int cpu_release(u32 nr, int argc, char *const argv[])
 
 		u32 val = readl(&crfapb_base->rst_fpd_apu);
 		val &= ~(1 << nr);
+		val &= ~(1 << (nr + 10));
 		writel(val, &crfapb_base->rst_fpd_apu);
 	} else {
 		if (argc != 2) {
