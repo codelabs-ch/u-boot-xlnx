@@ -252,7 +252,8 @@ static int zynq_serial_pending(struct udevice *dev, bool input)
 	if (input)
 		return !(readl(&regs->channel_sts) & ZYNQ_UART_SR_RXEMPTY);
 	else
-		return !!(readl(&regs->channel_sts) & ZYNQ_UART_SR_TXACTIVE);
+		return !!(readl(&regs->channel_sts) & ZYNQ_UART_SR_TXACTIVE) ||
+				!(readl(&regs->channel_sts) & ZYNQ_UART_SR_TXEMPTY);
 }
 
 static int zynq_serial_of_to_plat(struct udevice *dev)
